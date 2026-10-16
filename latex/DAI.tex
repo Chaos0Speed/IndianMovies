@@ -1,0 +1,141 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=0.65in,top=0.5in,bottom=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,booktabs,tabularx,enumitem}
+\usepackage[table]{xcolor}
+\usepackage{xurl}
+\definecolor{accent}{HTML}{1F3A5F}
+\definecolor{rowgray}{HTML}{F3F5F8}
+\usepackage[colorlinks=true,urlcolor=accent,linkcolor=accent]{hyperref}
+\usepackage{titlesec}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries\color{black}}{\thesection.}{0.5em}{}[\vspace{-6pt}{\color{black}}]
+\titleformat{\subsection}{\normalsize\bfseries\color{black}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\titlespacing*{\subsection}{0pt}{5pt}{1pt}
+
+\setlist{nosep,leftmargin=1.6em,itemsep=1.5pt}
+\setlength{\parskip}{3pt}\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\pagestyle{empty}
+
+\newcommand{\tool}[1]{\textbf{#1}}
+
+\begin{document}
+
+% ---------- Title block ----------
+\begin{center}
+  {\LARGE\bfseries\color{black} Team 05: The Budget Illusion: Why Bollywood’s “Safe Bets” May Not Be Safe}\\[3pt]
+  {\small Open Project \;|\; CS215: Data Analysis and Interpretation, IIT Bombay\\
+  Code repository: \url{https://github.com/Chaos0Speed/IndianMovies}}
+\end{center}
+\vspace{-8pt}
+{\color{accent}\hrule height 1pt}
+
+% ---------- 1 ----------
+\section{Main Hypothesis and Research Question}
+
+Conventional industry wisdom holds that holiday releases, franchises and remakes are safe investments, whereas new actors and directors are risky ones. We suspect that this view is confounded by scale. Large-budget films are more likely to be franchised, remade and released on holidays, while return on investment (ROI) falls mechanically as budget grows, because a given revenue represents a smaller multiple of a larger outlay. Raw comparisons of revenue or ROI across release strategies may therefore reflect differences in financial scale rather than the strategies themselves.
+
+\medskip
+\textbf{Research question.} \emph{After accounting for the scale of a film (budget and number of screens), do release timing, franchise or remake status, genre, and the novelty of the cast and crew still explain box-office performance in India, or is performance determined primarily by the financial and distribution resources committed to a film?}
+
+\medskip
+To address this question, we examine four hypotheses:
+\begin{itemize}
+  \item[\textbf{H1.}] Films released within a fixed window around a major festival (Diwali, Eid, Independence Day, Christmas) earn more than comparable non-festival releases of similar scale.
+  \item[\textbf{H2.}] Sequels earn more than non-sequels, even after controlling for budget and screens.
+  \item[\textbf{H3.}] Higher IMDb ratings are associated with higher earnings. Ratings accrue after release, so we claim association rather than prediction.
+  \item[\textbf{H4.}] Revenue is concentrated among a small number of recurring stars and directors.
+\end{itemize}
+
+\textbf{Analytical approach.}
+We proceed mainly in three stages. First, we observe the unadjusted monetary variables (budget and revenue) and convert them into ROI for a non-skewed distribution. 
+Second, we compare groups within similar ranges of budget and screens, using permutation and bootstrap procedures to estimate the precision of our data set.
+Third, we fit standard linear regression models to test whether release and content variables retain explanatory power once scale is controlled, and whether screens mediate the effect of budget. 
+Throughout, we report effect sizes and confidence intervals alongside p-values, and apply multiple-testing correction across hypotheses.
+
+\subsection{Programming Languages and Tools}
+\tool{Python} (pandas, SciPy, statsmodels, scikit-learn, matplotlib) for simulation and analysis, with \tool{R} as a cross-check where appropriate; \tool{GitHub} for version control (\url{https://github.com/Chaos0Speed/IndianMovies}); \tool{Google Sheets} for project logistics; and \tool{Plotly} for a compact interactive dashboard in the final deliverable.
+
+\subsection{Dataset}
+\textbf{Primary dataset:} \texttt{Data\_for\_repository.csv}, comprising 1{,}698 Hindi films and 14 columns. The data are India-focused (Indian films, figures in INR) and of moderate size, which is sufficient for stratified comparisons and regression with multiple predictors.
+
+\textbf{Source, licence and ethical conditions:} Premkumar, Prashant (2020), ``Bollywood Movies data'', Mendeley Data, V1, doi: \href{https://doi.org/10.17632/3c57btcxy9.1}{10.17632/3c57btcxy9.1}; available at \url{https://data.mendeley.com/datasets/3c57btcxy9/1}. The data contain film-level business figures, with names as they appear in public credits. We analyse at the film and genre level and do not profile individuals.
+
+\begin{center}\footnotesize
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{3.0cm}X@{}}
+\toprule
+\rowcolor{white}\textbf{Variable group} & \textbf{Columns (distinct values / range)}\\
+\midrule
+Outcome & Revenue (INR); derived ROI and revenue per screen\\
+Scale & Budget (INR); Number of Screens \\
+Release strategy & Release Period; Remake; Franchise\\
+Content & Genre (14 classes)\\
+Talent novelty & New Actor; New Director; New Music Director\\
+Identity & Lead Star;  Director; Music Director\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\vspace{-6pt}
+\newpage
+\textbf{Known limitations:}
+\begin{enumerate}[label=(\roman*)]
+  \item The dataset contains no release year, so inflation adjustment and trend control are not possible. Monetary comparisons are therefore relative within the sample rather than in real terms.
+  \item Monetary variables are strongly right-skewed; we therefore use log transformations and rank-based methods.
+  \item Films are not independent observations, since stars and directors recur across films. We address this through clustered standard errors.
+  \item The data cover Hindi cinema only, so our conclusions may not generalise to other Indian film industries.
+\end{enumerate}
+
+\subsection{LLM Conversation Links}
+\begin{itemize}
+  \item \url{https://claude.ai/share/ede8376a-8016-4513-9bcf-1f2e7e5a14a0}
+  \item \url{https://share.gemini.google/nV2WjyrVgRjq}
+\end{itemize}
+
+% ---------- 2 ----------
+\section{Logistics}
+
+\subsection{Project Tracking Spreadsheet}
+\url{https://docs.google.com/spreadsheets/d/1Uq2D5MdjAsLFLXG8qR6Nv4SFCqRq0ZuyhnNrdCJzuk0/edit?usp=sharing}
+
+\subsection{Division of Work and Working Plan}
+Each member leads one lecture theme and applies it to our data, so that every course topic is represented. All members review the final analysis and contribute to the report.
+
+\begin{center}\footnotesize
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\linewidth}{@{}p{1.6cm} X p{1.3cm}@{}}
+\toprule
+\rowcolor{white}\textbf{Member} & \textbf{Course theme and responsibilities} & \textbf{Serves}\\
+\midrule
+Ajay & Clean the data, create summary tables, and plot histograms and CDFs for the budget, revenue, and ROI directly on their standard scales and check for outliers and implausible values. & H1, H2\\
+Rushmith & Fit probability distributions to the unadjusted ROI and revenue data. Estimate parameters using Maximum Likelihood Estimation (MLE) and method of moments, and calculate standard errors, confidence intervals, and permutation simulations for ROI gaps across budget bands. & H1, H3\\
+Bhargav & Build standard linear regression models using parameters of the dataset and check for mediation through screen counts, run diagnostics, and validate models using a train/test split. & H2, H4\\
+Aryan & Run layered group tests to check the four hypotheses on how festivals, sequels, ratings, and star power impact the films and compute effect sizes, apply multiple-testing corrections, and measure revenue concentration.   &H3, H4\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\vspace{-6pt}
+
+\textbf{Working plan.}
+\begin{itemize}
+  \item \textbf{Meetings:} one weekly synchronous meeting of about an hour, in addition to regular class attendance. Weekly work is recorded in spreadsheet so that progress remains visible to all members.
+  \item \textbf{Version control:} a single shared repository with one branch per member; each pull request is reviewed by a second member before merging. Notebooks are named by owner and question (e.g., \texttt{q1\_m1\_eda.ipynb}).
+  \item \textbf{Milestones:}
+  \begin{itemize}
+    \item \emph{Checkpoint 1 (21 Oct):} repository with cleaning and EDA notebooks and initial distribution fits.
+    \item \emph{Final submission (4 Nov):} regression and testing notebooks , dashboard, 3--5 minute video, report, references with usage notes, and reflection note. Ajay verifies that all scripts run end to end.
+  \end{itemize}
+\end{itemize}
+
+% ---------- 3 ----------
+\section{Support Requested from the Teaching Team}
+\begin{itemize}
+  \item Could you recommend a public source for release years, or for the provenance of this dataset? With release years, we could add an inflation adjustment and control for temporal trends. We would also like to extend the analysis, if feasible, to Indian films across all industries rather than Bollywood alone, and would cite all sources in full.
+\end{itemize}
+
+\end{document}
