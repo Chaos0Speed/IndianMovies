@@ -1,0 +1,109 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper, margin=1.05cm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\definecolor{links}{RGB}{15, 76, 129}
+\definecolor{primary}{RGB}{0, 0, 0}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=links,
+    urlcolor=links,
+    citecolor=links
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\leftmargini}{12.7pt}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{\textcolor{primary}{The Budget Illusion: Why Bollywood's ``Safe Bets'' May Not Be Safe}}}\\[2pt]
+    {\small Open Project $|$ CS215: Data Analysis and Interpretation $|$ IIT Bombay}\\[2pt]
+    {\small \textbf{Checkpoint 1 Progress Report}}\\[1.5pt]
+    \rule{\textwidth}{0.4pt}
+\end{center}
+\vspace{-10.5pt}
+
+\textbf{\textcolor{primary}{Section 1: Meta Information}}
+
+\vspace{1pt}
+\textbf{Group 05:} \hfill \textbf{Mentor:} Avadh Hindocha
+
+\textbf{Members:}\\
+Ajay -- 25B0929\\
+Bhargav -- 25B0940\\
+Rushmith -- 25B1029\\
+Aryan -- 25B1098
+
+\vspace{12pt}
+\textbf{GitHub Repository:} \url{https://github.com/Chaos0Speed/IndianMovies/}
+
+\vspace{5pt}
+\textbf{\textcolor{primary}{Section 2: Progress So Far}}
+
+\vspace{1pt}
+\textbf{Descriptive Statistics of the Dataset}\\
+We use the Bollywood Movies dataset by Prashant Premkumar (2020), obtained from Mendeley Data (\href{https://data.mendeley.com/datasets/3c57btcxy9/1}{dataset link}). The
+primary dataset consists of 1,698 rows and 14 columns detailing various attributes of Hindi films. Key columns include
+budget, revenue (in INR), screen count, genre, release period, remake status, franchise status, and cast/crew novelty. The
+dataset was obtained from public domain sources (publicly accessible data permissions) ensuring no access or compliance
+issues. Initial inspection revealed the absence of release years, which restricts our ability to track temporal inflation.
+
+\textbf{Notebook 1 -- Data Cleaning}\\
+We conducted rigorous data cleaning to establish a reliable foundation. Duplicate rows were removed, and string inconsistencies
+across categorical values were standardized. We converted categorical Yes/No variables (such as remake, franchise, new actor,
+new director, and new music director) and holiday/normal release periods into binary indicators. Genres were split and
+one-hot encoded using Pandas dummy variables. To account for film scale, we engineered a composite `Movie\_Scale` feature
+by log-transforming budget and screen counts, normalizing them, and combining them with equal weights. Additionally, we
+calculated two critical success metrics: revenue per screen and the revenue-to-budget ratio. The final processed data was
+exported as `CleanedDataSet.csv` for downstream analysis.
+
+\textbf{Notebook 2 -- Exploratory Data Analysis}\\
+Our exploratory data analysis involved examining data types, checking unique categories, and compiling numerical summaries
+for our engineered dataset. We visualized category counts and percentages to map the distribution of holiday releases,
+remakes, franchises, and debutant talent. Crucially, we plotted histograms to observe the distributions of numerical features
+like budget, revenue, and revenue-to-budget ratios. The histograms clearly show significant right-skewness in financial returns,
+with a heavy tail of blockbusters masking a large cluster of average/low-performing movies. These histogram visualizations
+underscore the necessity of applying log transformations or non-parametric tests when analyzing success metrics across
+categories (e.g., new versus established talent).
+
+\textbf{Fine-grained Problem Statement Refinement}\\
+We aim to investigate whether traditional Bollywood “safe bets” specifically holiday releases, remakes, and franchise
+continuation genuinely yield better financial performance (measured by revenue-to-budget ratio and revenue per screen).
+Furthermore, we are evaluating whether introducing debutant talent impacts a movie’s financial success once we control for
+budget scale and screen count. We will use group comparisons, hypothesis testing, and regression analysis to determine if
+these factors remain significant predictors of success beyond raw financial backing.
+
+\textbf{Division and Revision of Responsibilities}
+\vspace{-5pt}
+\begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}
+    \item \textbf{Ajay:} Data cleaning operations, summary tables, distribution plots (including histograms), and outlier detection checks.
+    \item \textbf{Rushmith:} Distribution fitting, parameter estimation, constructing confidence intervals, and running permutation simulations.
+    \item \textbf{Bhargav:} Setting up regression models, conducting diagnostic checks, and analyzing screen-count mediation.
+    \item \textbf{Aryan:} Formal hypothesis testing, calculating effect sizes, multiple-testing corrections, and revenue concentration analysis.
+\end{itemize}
+\vspace{-6pt}
+
+\textbf{Updated Tracking Spreadsheet}\\
+\href{https://docs.google.com/spreadsheets/d/1Uq2D5MdjAsLFLXG8qR6Nv4SFCqRq0ZuyhnNrdCJzuk0/edit?usp=sharing}{Google Sheets Project Tracker}\\
+We have updated our tracker to include a dedicated row containing our meta-information content as per the guidelines. Edit
+access has been fully verified and granted to our mentor, Avadh Hindocha, ensuring seamless collaboration.
+
+\textbf{Blockers and Challenges}\\
+Our primary challenge is the absence of exact release years in the dataset, which prevents us from adjusting revenues for
+inflation and identifying strict temporal trends. Additionally, the histograms revealed severe right-skewness and outliers
+in the revenue columns. We are consulting statistical resources to decide whether these extreme values should be capped,
+log-transformed, or analyzed separately to prevent them from overly skewing our regression models. Immediate guidance
+from the Teaching Team on handling inflation without precise release years would be highly appreciated
+
+\end{document}

@@ -1,21 +1,20 @@
-FILES = proposal checkpoint1
 
-all	: $(FILES)
+FILES := $(basename $(notdir $(wildcard ./latex/*.tex)))
+
+all: $(FILES)
 
 $(FILES): %: %.pdf
 	@$(MAKE) clean
 
-
 %.pdf: ./latex/%.tex
-	@if [ -f $@ ]; then rm $@ ; fi
+	@rm -f $@
 	@echo "Creating new $@"
-	@pdflatex $< > /dev/null
-	@pdflatex $< > /dev/null
+	@pdflatex -interaction=nonstopmode -halt-on-error $< > /dev/null
+	@pdflatex -interaction=nonstopmode -halt-on-error $< > /dev/null
 	@echo "Creation Successful"
 
-clean	:
+clean:
 	@echo "Removing excess files"
-	@rm -f *.aux *.log *.out 
-	
+	cla@rm -f *.aux *.log *.out
 
-.PHONY	: all clean
+.PHONY: all clean $(FILES)
