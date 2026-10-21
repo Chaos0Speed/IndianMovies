@@ -1,20 +1,21 @@
-all	: DAI.pdf clean open
+FILES = proposal checkpoint1
 
-report	: DAI.pdf clean
+all	: $(FILES)
+
+$(FILES): %: %.pdf
+	@$(MAKE) clean
 
 
-DAI.pdf: ./latex/DAI.tex
-	@if [ -f 'report.pdf' ]; then mv 'DAI.pdf' './.old_DAI.pdf'; fi
-	@echo "Creating new full Report"
-	@pdflatex latex/DAI.tex > /dev/null
-	@pdflatex latex/DAI.tex > /dev/null
+%.pdf: ./latex/%.tex
+	@if [ -f $@ ]; then rm $@ ; fi
+	@echo "Creating new $@"
+	@pdflatex $< > /dev/null
+	@pdflatex $< > /dev/null
 	@echo "Creation Successful"
 
 clean	:
 	@echo "Removing excess files"
 	@rm -f *.aux *.log *.out 
 	
-open	:
-	open DAI.pdf
 
-PHONY	: full page all clean open
+.PHONY	: all clean
