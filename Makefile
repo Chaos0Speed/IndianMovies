@@ -1,4 +1,3 @@
-
 FILES := $(basename $(notdir $(wildcard ./latex/*.tex)))
 
 all: $(FILES)

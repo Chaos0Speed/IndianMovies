@@ -1,6 +1,6 @@
-# IndianMovies : The Budget Illusion
+# Group 05 - IndianMovies : The Budget Illusion
 
-### Group 05
+### Group Details
 | Roll No | Name |
 | :--- | :--- |
 | 25B0929 | Vangala Ajay Reddy |
