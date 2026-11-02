@@ -8,6 +8,16 @@
 | 25B1029 | Rushmith Bandari |
 | 25B1098 | Aryan Balabadrula |
 
+### Reproducing
+```bash
+pip install -r requirements.txt
+jupyter nbconvert --to notebook --execute --inplace 1.CleanUp.ipynb   # regenerates CleanedDataSet.csv
+jupyter nbconvert --to notebook --execute --inplace 2.EDA.ipynb       # ...then 3, 4, 5 in order
+jupyter nbconvert --to notebook --execute --inplace 6.Dashboard.ipynb # regenerates dashboard.html
+make all                                                              # builds latex/proposal.pdf
+```
+Notebook 1 must run first; every later notebook reads the `CleanedDataSet.csv` it writes.
+
 
 ### Step 1: DataSet Cleaning (`1.CleanUp.ipynb`)
 - Clean the dataset: drop duplicates, align every column to a proper numerical/boolean dtype for the linear regression, encode the Yes/No flags and genre dummies, and derive `Movie_Scale`, `Revenue Per Screen` and `ROI`.

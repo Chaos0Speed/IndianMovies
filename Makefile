@@ -1,4 +1,4 @@
-FILES = proposal checkpoint1
+FILES = proposal
 
 all	: $(FILES)
 
