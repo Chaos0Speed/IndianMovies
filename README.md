@@ -13,7 +13,6 @@
 pip install -r requirements.txt
 jupyter nbconvert --to notebook --execute --inplace 1.CleanUp.ipynb   # regenerates CleanedDataSet.csv
 jupyter nbconvert --to notebook --execute --inplace 2.EDA.ipynb       # ...then 3, 4, 5 in order
-jupyter nbconvert --to notebook --execute --inplace 6.Dashboard.ipynb # regenerates dashboard.html
 make all                                                              # builds latex/proposal.pdf
 ```
 Notebook 1 must run first; every later notebook reads the `CleanedDataSet.csv` it writes.
@@ -34,13 +33,9 @@ Notebook 1 must run first; every later notebook reads the `CleanedDataSet.csv` i
 - Scale-stratified permutation tests with effect sizes and bootstrap CIs
 - Implications are printed immediately after every result
 - Holm-Bonferroni correction across the full family of tests
-- H3 (IMDb ratings) is untestable with the current dataset - no ratings column; the notebook auto-runs once `imdb_ratings.csv` is provided
+- H3 (genre composition): adult-genre films out-earn mainstream films at comparable scale (median ROI ≈ 0.53 vs ≈ 0.07 in the small-scale bands); stratified permutation test, restricted to the scale bins where adult films exist
 
 ### Step 5: Distribution Fitting (`5.DistributionFitting.ipynb`)
 - MLE and method-of-moments fits for ROI (Gamma wins) and revenue (log-normal)
 - AIC/BIC/KS comparison, bootstrap parameter SEs and confidence intervals
 - Permutation test for ROI gaps across budget bands
-
-### Step 6: Interactive Dashboard (`6.Dashboard.ipynb` -> `dashboard.html`)
-- Plotly dashboard with the distributions, scale effect, hypothesis scoreboard and Lorenz curves
-- Regenerate by running the notebook top-to-bottom after any upstream change

@@ -38,7 +38,7 @@
 % ---------- 1 ----------
 \section{Main Hypothesis and Research Question}
 
-Conventional industry wisdom holds that holiday releases, franchises and remakes are safe investments, whereas new actors and directors are risky ones. We suspect that this view is confounded by scale. Large-budget films are more likely to be franchised, remade and released on holidays, while return on investment (ROI) falls mechanically as budget grows, because a given revenue represents a smaller multiple of a larger outlay. Raw comparisons of revenue or ROI across release strategies may therefore reflect differences in financial scale rather than the strategies themselves.
+Conventional industry wisdom holds that holiday releases, franchises and remakes are safe investments, whereas new actors and directors are risky ones. We suspect that this view is confounded by scale. Large-budget films are more likely to be franchised, remade and released on holidays, while return on investment (ROI) itself varies systematically with financial scale. Raw comparisons of revenue or ROI across release strategies may therefore reflect differences in financial scale rather than the strategies themselves.
 
 \medskip
 \textbf{Research question.} \emph{After accounting for the scale of a film (budget and number of screens), do release timing, franchise or remake status, genre, and the novelty of the cast and crew still explain box-office performance in India, or is performance determined primarily by the financial and distribution resources committed to a film?}
@@ -48,7 +48,7 @@ To address this question, we examine four hypotheses:
 \begin{itemize}
   \item[\textbf{H1.}] Films released within a fixed window around a major festival (Diwali, Eid, Independence Day, Christmas) earn more than comparable non-festival releases of similar scale.
   \item[\textbf{H2.}] Sequels earn more than non-sequels, even after controlling for budget and screens.
-  \item[\textbf{H3.}] Higher IMDb ratings are associated with higher earnings. Ratings accrue after release, so we claim association rather than prediction.
+  \item[\textbf{H3.}] At comparable scale, adult-genre films out-earn mainstream films: the micro-budget adult segment recoups about half its budget, comparable mainstream films almost nothing.
   \item[\textbf{H4.}] Revenue is concentrated among a small number of recurring stars and directors.
 \end{itemize}
 
@@ -89,6 +89,7 @@ Identity & Lead Star;  Director; Music Director\\
   \item Monetary variables are strongly right-skewed; we therefore use log transformations and rank-based methods.
   \item Films are not independent observations, since stars and directors recur across films. We address this through clustered standard errors.
   \item The data cover Hindi cinema only, so our conclusions may not generalise to other Indian film industries.
+  \item The adult-genre segment that motivates H3 is small and scale-confined (76 films, none beyond the lower-middle of the scale range), so H3 is an association within scale bands rather than a general genre effect.
 \end{enumerate}
 
 \subsection{LLM Conversation Links}
@@ -115,7 +116,7 @@ Each member leads one lecture theme and applies it to our data, so that every co
 Ajay & Clean the data, create summary tables, and plot histograms and CDFs for the budget, revenue, and ROI directly on their standard scales and check for outliers and implausible values. & H1, H2\\
 Rushmith & Fit probability distributions to the unadjusted ROI and revenue data. Estimate parameters using Maximum Likelihood Estimation (MLE) and method of moments, and calculate standard errors, confidence intervals, and permutation simulations for ROI gaps across budget bands. & H1, H3\\
 Bhargav & Build standard linear regression models using parameters of the dataset and check for mediation through screen counts, run diagnostics, and validate models using a train/test split. & H2, H4\\
-Aryan & Run layered group tests to check the four hypotheses on how festivals, sequels, ratings, and star power impact the films and compute effect sizes, apply multiple-testing corrections, and measure revenue concentration.   &H3, H4\\
+Aryan & Run layered group tests to check the four hypotheses on how festivals, sequels, genre composition, and star power impact the films and compute effect sizes, apply multiple-testing corrections, and measure revenue concentration.   &H3, H4\\
 \bottomrule
 \end{tabularx}
 \end{center}
