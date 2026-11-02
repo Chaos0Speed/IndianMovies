@@ -6,17 +6,14 @@
 | 25B0929 | Vangala Ajay Reddy |
 | 25B0940 | Laxmi Bhargav Mende |
 | 25B1029 | Rushmith Bandari |
-<<<<<<< Updated upstream
-| 25B1098 | Aryan Balabadrula |
-=======
 | 25B1098 | Aryan Balabadrula |
 
 
-### Step1: DataSet Cleaning
-- CleanUp the directory, align all variables to match a proper nuumerical datatype for the linear regression
+### Step 1: DataSet Cleaning (`1.CleanUp.ipynb`)
+- Clean the dataset: drop duplicates, align every column to a proper numerical/boolean dtype for the linear regression, encode the Yes/No flags and genre dummies, and derive `Movie_Scale`, `Revenue Per Screen` and `ROI`.
 
-### Step 2: EDA - Elementary Data Analysis
-- Analysis the datset before the actual regression model to understand the data better and get insights on how to proceed forward.
+### Step 2: EDA - Exploratory Data Analysis (`2.EDA.ipynb`)
+- Analyse the dataset before the actual regression model to understand the data better and get insights on how to proceed forward.
 
 ### Step 3: Linear Regression - Scale, Mediation and Validation (`3.LinearRegression.ipynb`)
 - ROI regression with `Movie_Scale` band controls, winsorized-ROI sensitivity check
@@ -37,4 +34,3 @@
 ### Step 6: Interactive Dashboard (`6.Dashboard.ipynb` -> `dashboard.html`)
 - Plotly dashboard with the distributions, scale effect, hypothesis scoreboard and Lorenz curves
 - Regenerate by running the notebook top-to-bottom after any upstream change
->>>>>>> Stashed changes
