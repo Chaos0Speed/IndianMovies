@@ -1,0 +1,8 @@
+schema: "classroom50/repo-config/v1"
+classroom: "dai-aug-2026"
+assignment: "openproject"
+secret: "dai2026"
+owner:
+  username: "Chaos0Speed"
+  id: 248126363
+  accepted_at: "2026-10-24T06:13:53Z"
