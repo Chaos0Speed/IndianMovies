@@ -28,10 +28,12 @@ Outputs: `CleanedDataSet.csv`, `histograms/*.png`, `proposal.pdf`.
 ## Key results (full detail in the notebooks)
 
 - The typical film loses money: **72.1%** have ROI < 1; median ROI is 0.335.
-- Scale explains most of the raw "safe bet" premiums (raw → scale-adjusted ROI, HC3): holiday **+0.23 → +0.06** (n.s.),
-  franchise **+1.38 → +0.67** (survives), remake **+0.96 → +0.30** (survives, weaker).
-- All verdicts re-confirmed on the log scale validated in notebook 3 (R² 0.371 → 0.549): franchise ≈ **+40%** and
-  remake ≈ **+42%** ROI survive; the drama/rom_com/documentary premiums dissolve on that scale, scoping the genre
-  effect to adult (≈ **+407%** ROI).
+- Models explain **log(ROI)** — the near-normal scale validated in notebook 3 (R² 0.549 vs 0.371 for raw ROI);
+  coefficients read as percentage effects. Scale absorbs most of the raw "safe bet" premiums
+  (unadjusted → full): holiday **+0.28 → −0.02** (n.s.), franchise **+1.70 → +0.34** (≈ **+40%** ROI, survives),
+  remake **+1.60 → +0.35** (≈ **+42%** ROI, survives).
+- The genre effect is scoped to adult (≈ **+407%** ROI at comparable scale; horror ≈ **+55%** emerges); the
+  drama / rom_com / documentary premiums appear only on raw ROI and dissolve on the validated scale.
 - **49.6%** of budget's effect on revenue is mediated by screens (bootstrap 99% CI excludes 0).
-- Revenue is extremely concentrated: star-level Gini **0.954**, top-10 stars hold **59.3%** of all revenue.
+- Revenue is extremely concentrated: star-level Gini **0.954**, top-10 stars hold **59.3%** of all revenue; star
+  names add **+0.32** of explained variance to log(ROI) beyond scale bands.
