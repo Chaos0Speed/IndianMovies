@@ -47,22 +47,22 @@ Conventional industry wisdom holds that holiday releases, franchises and remakes
 To address this question, we examine four hypotheses:
 \begin{itemize}
   \item[\textbf{H1.}] Films released within a fixed window around a major festival (Diwali, Eid, Independence Day, Christmas) earn more than comparable non-festival releases of similar scale.
-  \item[\textbf{H2.}] Sequels earn more than non-sequels, even after controlling for budget and screens.
-  \item[\textbf{H3.}] At comparable scale, adult-genre films out-earn mainstream films: the micro-budget adult segment recoups about half its budget, comparable mainstream films almost nothing.
+  \item[\textbf{H2.}] Remakes earn more than original films, even after controlling for budget and screens.
+  \item[\textbf{H3.}] Some genres out-earn mainstream films once scale is held fixed.
   \item[\textbf{H4.}] Revenue is concentrated among a small number of recurring stars and directors.
 \end{itemize}
 
 \textbf{Analytical approach.}
-We proceed mainly in three stages. First, we observe the unadjusted monetary variables (budget and revenue) and convert them into ROI for a non-skewed distribution. 
+We proceed mainly in three stages. First, we observe the unadjusted monetary variables (budget and revenue), convert them into ROI, and analyse revenue on the log scale, where its distribution is close to normal. 
 Second, we compare groups within similar ranges of budget and screens, using permutation and bootstrap procedures to estimate the precision of our data set.
 Third, we fit standard linear regression models to test whether release and content variables retain explanatory power once scale is controlled, and whether screens mediate the effect of budget. 
-Throughout, we report effect sizes and confidence intervals alongside p-values, and apply multiple-testing correction across hypotheses.
+Throughout, we report effect sizes and confidence intervals alongside p-values.
 
 \subsection{Programming Languages and Tools}
-\tool{Python} (pandas, SciPy, statsmodels, scikit-learn, matplotlib) for simulation and analysis, with \tool{R} as a cross-check where appropriate; \tool{GitHub} for version control (\url{https://github.com/Chaos0Speed/IndianMovies}); \tool{Google Sheets} for project logistics; and \tool{Plotly} for a compact interactive dashboard in the final deliverable.
+\tool{Python} (pandas, SciPy, statsmodels, scikit-learn, matplotlib) for simulation and analysis; \tool{GitHub} for version control (\url{https://github.com/Chaos0Speed/IndianMovies}); and \tool{Google Sheets} for project logistics.
 
 \subsection{Dataset}
-\textbf{Primary dataset:} \texttt{Data\_for\_repository.csv}, comprising 1{,}698 Hindi films and 14 columns. The data are India-focused (Indian films, figures in INR) and of moderate size, which is sufficient for stratified comparisons and regression with multiple predictors.
+\textbf{Primary dataset:} \texttt{DataSet.csv}, comprising 1{,}698 Hindi films and 14 columns. The data are India-focused (Indian films, figures in INR) and of moderate size, which is sufficient for stratified comparisons and regression with multiple predictors.
 
 \textbf{Source, licence and ethical conditions:} Premkumar, Prashant (2020), ``Bollywood Movies data'', Mendeley Data, V1, doi: \href{https://doi.org/10.17632/3c57btcxy9.1}{10.17632/3c57btcxy9.1}; available at \url{https://data.mendeley.com/datasets/3c57btcxy9/1}. The data contain film-level business figures, with names as they appear in public credits. We analyse at the film and genre level and do not profile individuals.
 
@@ -86,8 +86,8 @@ Identity & Lead Star;  Director; Music Director\\
 \textbf{Known limitations:}
 \begin{enumerate}[label=(\roman*)]
   \item The dataset contains no release year, so inflation adjustment and trend control are not possible. Monetary comparisons are therefore relative within the sample rather than in real terms.
-  \item Monetary variables are strongly right-skewed; we therefore use log transformations and rank-based methods.
-  \item Films are not independent observations, since stars and directors recur across films. We address this through clustered standard errors.
+  \item Monetary variables are strongly right-skewed; we therefore use log transformations (revenue is close to normal on the log scale) and HC3-robust inference for the ROI models instead of assuming normality on the raw scale.
+  \item Films are not independent observations, since stars and directors recur across films. We partially address this through scale-stratified comparisons and HC3 robust standard errors; fully clustered standard errors by star and director are left to future work.
   \item The data cover Hindi cinema only, so our conclusions may not generalise to other Indian film industries.
   \item The adult-genre segment that motivates H3 is small and scale-confined (76 films, none beyond the lower-middle of the scale range), so H3 is an association within scale bands rather than a general genre effect.
 \end{enumerate}
@@ -116,7 +116,7 @@ Each member leads one lecture theme and applies it to our data, so that every co
 Ajay & Clean the data, create summary tables, and plot histograms and CDFs for the budget, revenue, and ROI directly on their standard scales and check for outliers and implausible values. & H1, H2\\
 Rushmith & Fit probability distributions to the unadjusted ROI and revenue data. Estimate parameters using Maximum Likelihood Estimation (MLE) and method of moments, and calculate standard errors, confidence intervals, and permutation simulations for ROI gaps across budget bands. & H1, H3\\
 Bhargav & Build standard linear regression models using parameters of the dataset and check for mediation through screen counts, run diagnostics, and validate models using a train/test split. & H2, H4\\
-Aryan & Run layered group tests to check the four hypotheses on how festivals, sequels, genre composition, and star power impact the films and compute effect sizes, apply multiple-testing corrections, and measure revenue concentration.   &H3, H4\\
+Aryan & Run layered group tests to check the four hypotheses on how festivals, sequels, genre composition, and star power impact the films and compute effect sizes, and measure revenue concentration.   &H3, H4\\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -125,11 +125,11 @@ Aryan & Run layered group tests to check the four hypotheses on how festivals, s
 \textbf{Working plan.}
 \begin{itemize}
   \item \textbf{Meetings:} one weekly synchronous meeting of about an hour, in addition to regular class attendance. Weekly work is recorded in spreadsheet so that progress remains visible to all members.
-  \item \textbf{Version control:} a single shared repository with one branch per member; each pull request is reviewed by a second member before merging. Notebooks are named by owner and question (e.g., \texttt{q1\_m1\_eda.ipynb}).
+  \item \textbf{Version control:} a single shared repository with one branch per member; each pull request is reviewed by a second member before merging. Notebooks are numbered by pipeline stage (\texttt{1.CleanUp.ipynb} \ldots{} \texttt{5.HypothesisTesting.ipynb}).
   \item \textbf{Milestones:}
   \begin{itemize}
     \item \emph{Checkpoint 1 (21 Oct):} repository with cleaning and EDA notebooks and initial distribution fits.
-    \item \emph{Final submission (4 Nov):} regression and testing notebooks , dashboard, 3--5 minute video, report, references with usage notes, and reflection note. Ajay verifies that all scripts run end to end.
+    \item \emph{Final submission (4 Nov):} regression and testing notebooks, 3--5 minute video, report, references with usage notes, and reflection note. Ajay verifies that all scripts run end to end.
   \end{itemize}
 \end{itemize}
 
