@@ -8,11 +8,11 @@ status, genre and crew novelty still explain box-office performance?
 
 | Notebook | Purpose |
 |---|---|
-| `1.CleanUp.ipynb` | Cleans `DataSet.csv` → `CleanedDataSet.csv` (bool flags, genre dummies, `ROI`, `Revenue Per Screen`, `Movie_Scale`) |
-| `2.EDA.ipynb` | Summary statistics, histograms, group comparisons (franchise / remake / holiday), star & director counts |
-| `3.DistributionFitting.ipynb` | χ² goodness-of-fit contest over six families (lognormal wins for revenue and ROI), MoM vs MLE, QQ + luck-tube audit, simulation CIs, per-budget-band permutation tests |
-| `4.LinearRegression.ipynb` | Scale-adjusted ROI regressions, budget→screens→revenue mediation, winsorization + HC3 robust SEs, train/test validation |
-| `5.HypothesisTesting.ipynb` | H1–H4 four-stage OLS ladders (raw → content → scale → full, HC3), Gini / top-10 revenue concentration, scale-adjusted star ranking |
+| `1.CleanUp.ipynb` | Cleans `DataSet.csv` → `CleanedDataSet.csv` (bool flags, genre dummies, `ROI`, `Revenue Per Screen`, `Movie_Scale`) and verifies the output against the raw data |
+| `2.EDA.ipynb` | EDA only: summary statistics, distributions, categorical composition, descriptive group comparisons (no tests), ROI by scale band |
+| `3.DistributionFitting.ipynb` | Distribution fitting proofs: χ² contests (lognormal wins for revenue and ROI), MoM vs MLE, QQ luck-tube audit, bootstrap CIs |
+| `4.LinearRegression.ipynb` | Regression only: log(ROI) response, scale-adjusted models, mediation, HC3 diagnostics, train/test validation |
+| `5.HypothesisTesting.ipynb` | Hypothesis tests only: H1–H4 four-stage OLS ladders (HC3), permutation confirmation within scale bins, revenue concentration |
 
 ## How to run
 
