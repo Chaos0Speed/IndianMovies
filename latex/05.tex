@@ -1,0 +1,442 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{mathptmx} % Times New Roman font
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+
+\begin{document}
+
+% ==========================================
+% SECTION 1: META INFORMATION
+% ==========================================
+\section*{Section 1: Meta Information}
+
+\begin{enumerate}
+    \item \textbf{Open Project Title:} The Budget Illusion: Why Bollywood’s “Safe
+Bets” May Not Be Safe
+    \item \textbf{Group ID:} 005
+    \item \textbf{Mentor Name:} Avadh Hindocha
+    \item \textbf{Group Member Names and Roll Numbers:}
+    \begin{itemize}
+        \item Ajay - 25B0929
+        \item Bhargav - 25B0940
+        \item Rushmith - 25B1029
+        \item Aryan - 25B1098
+    \end{itemize}
+    \item \textbf{Honor Code and Discussions:}  \\
+AI tools were used as supplementary assistance during the project, primarily for certain Python implementation tasks and LaTeX documentation. For Python, AI assistance was used to help translate our pseudocode and implementation requirements into code. For the report, we used AI to obtain a LaTeX template and guidance on what content to include in each section. However, the project's core ideas, research questions, analytical approach, decisions, and overall workflow were developed and determined by the team. AI was used as a supporting tool rather than as a substitute for our own understanding, reasoning, or contributions.
+  \item \textbf{LLM Usage Links:}
+\begin{itemize}
+    \item \url{https://share.gemini.google/tGYx40CPCnWn}
+    \item \url{https://claude.ai/share/83498c5b-25fc-4877-ac3a-ed15da3987ef}
+    \item \url{https://claude.ai/share/0ea76202-c0d0-46a9-98eb-fe4cfe0bfa2f}
+\end{itemize}
+
+    \item \textbf{Link to Video Presentation:} \url{https://drive.google.com/file/d/1r3Dd65ePKn0RtzbTJtbh5ogq2vWDDHb0/view?usp=drivesdk}
+    \item \textbf{GitHub Repository Link:} \url{https://github.com/Chaos0Speed/IndianMovies/}.
+\item \textbf{GitHub Repository and Initial Commit:}
+\begin{itemize}
+    \item \url{https://github.com/Chaos0Speed/} --- October 13
+\end{itemize}
+
+All tasks were completed, and the code was shared with Bhargav, who pushed the changes to the repository to avoid merge conflicts and ensure smooth integration.
+   \item \textbf{Contribution Breakdown:}
+
+\begin{center}
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{Roll Number} & \textbf{Name} & \textbf{Contribution (\%)} \\
+\hline
+25B0929 & Ajay & 100 \\
+\hline
+25B0940 & Bhargav & 100 \\
+\hline
+25B1029 & Rushmith & 100 \\
+\hline
+25B1098 & Aryan & 100 \\
+\hline
+AI & AI & 75 \\
+\hline
+\end{tabular}
+\end{center}
+
+Individual contributions varied slightly among team members, with individual estimates ranging approximately from 90\% to 100\%. However, in accordance with the given instructions, these contributions have been rounded to 100\%. The 75\% contribution attributed to AI represents its supplementary assistance in converting pseudocode into Python implementations and in preparing the LaTeX documentation, including the template and section-wise content guidance.
+    
+\end{enumerate}
+
+\newpage
+% ==========================================
+% SECTION 2: TECHNICAL CONTENT
+% ==========================================
+\section*{Section 2: Technical Content}
+
+\subsection*{Core Problem Statement}
+After accounting for the scale of a film (budget and number of screens), do release
+timing, franchise or remake status, genre, and the novelty of the cast and crew still explain box-office
+performance in India, or is performance determined primarily by the financial and distribution resources
+committed to a film?
+
+\subsection*{Data Source(s)}
+
+Premkumar, Prashant (2020), ``Bollywood Movies data'', Mendeley Data, V1, 
+doi: \href{https://doi.org/10.17632/3c57btcxy9.1}{10.17632/3c57btcxy9.1}; 
+available at \url{https://data.mendeley.com/datasets/3c57btcxy9/1}. 
+The data contain film-level business figures, with names as they appear in public credits.
+
+\subsubsection*{Dataset Information}
+
+\begin{itemize}
+    \item \textbf{Dataset Name:} CleanedDataSet.csv
+    \item \textbf{Number of Rows:} 1,698
+    \item \textbf{Number of Columns:} 29
+    \item \textbf{File Format:} CSV (Comma-Separated Values)
+    \item \textbf{Unit of Observation:} Each row represents one Hindi movie.
+    \item \textbf{Missing Values:} 0
+    \item \textbf{Original Dataset:} Bollywood Movies Data by Prashant Premkumar (2020).
+    
+\end{itemize}
+
+\subsubsection*{Dataset Columns and Data Types}
+
+The final cleaned dataset consists of the following 29 columns. The features have been neatly organized below:
+
+\begin{table}[htbp]
+\centering
+\caption{Dataset Features and Their Data Types}
+\label{tab:dataset_features}
+\renewcommand{\arraystretch}{1.1} % Gives a little breathing room to the rows
+\begin{tabular}{|l|l||l|l|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Column Name} & \textbf{Data Type} \\ \hline
+Movie Name & String & Genre\_fantasy & Boolean \\ \hline
+Lead Star & String & Genre\_horror & Boolean \\ \hline
+Director & String & Genre\_love\_story & Boolean \\ \hline
+Music Director & String & Genre\_masala & Boolean \\ \hline
+Remake & Boolean & Genre\_mythological & Boolean \\ \hline
+Franchise & Boolean & Genre\_rom\_com & Boolean \\ \hline
+Holiday & Boolean & Genre\_suspense & Boolean \\ \hline
+New\_Actor & Boolean & Genre\_thriller & Boolean \\ \hline
+New\_Director & Boolean & Budget & Integer \\ \hline
+New\_Music\_Director & Boolean & Revenue & Integer \\ \hline
+Genre\_adult & Boolean & Number of Screens & Integer \\ \hline
+Genre\_animation & Boolean & Revenue Per Screen & Float \\ \hline
+Genre\_comedy & Boolean & Movie\_Scale & Float \\ \hline
+Genre\_documentary & Boolean & ROI & Float \\ \hline
+Genre\_drama & Boolean & & \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection*{Data Preprocessing and Transformations}
+
+The original dataset was cleaned and transformed to make it suitable for statistical analysis and predictive modelling. The following preprocessing steps and feature engineering operations were performed:
+
+\begin{itemize}
+    \item \textbf{Genre One-Hot Encoding:}
+    The original categorical genre variable was converted into separate binary columns for each genre, such as \texttt{Genre\_comedy}, \texttt{Genre\_drama}, and \texttt{Genre\_thriller}.
+
+    \item \textbf{Categorical to Boolean Conversion:}
+    Categorical attributes such as \texttt{Remake}, \texttt{Franchise}, \texttt{Holiday}, \texttt{New\_Actor}, \texttt{New\_Director}, and \texttt{New\_Music\_Director} were converted into Boolean values (True/False).
+
+    \item \textbf{Feature Engineering:}
+    Three additional numerical features were introduced:
+    \begin{itemize}
+        \item \textbf{Revenue Per Screen:} Revenue divided by the number of screens.
+        \item \textbf{Movie\_Scale:} A derived numerical indicator representing movie scale.
+        \item \textbf{ROI:} A derived measure of return on investment.
+    \end{itemize}
+
+    \item \textbf{Data Type Conversion:}
+    Financial and distribution variables were stored as integers, while derived numerical variables were stored as floating-point values.
+
+    \item \textbf{Data Cleaning:}
+    Missing values were handled during preprocessing. The final cleaned dataset contains no missing values across its 29 columns.
+\end{itemize}
+
+\subsubsection*{Dataset Accessibility}
+
+The original dataset and our cleaned version are available at the following locations:
+
+\begin{itemize}
+    \item \textbf{Original Dataset:} \href{https://data.mendeley.com/datasets/3c57btcxy9/1}{Bollywood Movies Data -- Mendeley Data} (DOI: 10.17632/3c57btcxy9.1)
+    \item \textbf{Cleaned Dataset:} \href{https://drive.google.com/file/d/17AiPMw-PDkxZx-mt27n7F4h9nfl6hwbv/view?usp=sharing}{\texttt{CleanedDataSet.csv}}
+    \item \textbf{Project Repository:} \href{https://github.com/Chaos0Speed/IndianMovies}{GitHub Repository}
+\end{itemize}
+
+\subsection*{Tools and Software Packages}
+
+\begin{table}[htbp]
+\centering
+\caption{Tools and Software Packages Utilized}
+\label{tab:tools_packages}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Library / Module} & \textbf{Library / Module} \\ \hline
+Pandas & NumPy \\ \hline
+Matplotlib & SciPy (\texttt{scipy.stats}) \\ \hline
+Statsmodels & Math \\ \hline
+Statistics & OS \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection*{Challenges and Results Achieved}
+
+\begin{enumerate}
+    \item \textbf{Dataset Identification and Availability:}
+    Finding a suitable dataset was one of the initial challenges. Several datasets explored either lacked important variables required for our analysis or contained corrupted, incomplete, or inconsistent records. Identifying a dataset that provided reliable financial information along with relevant movie characteristics required considerable effort.
+
+    \item \textbf{Interpreting Results:}
+    Translating statistical results and visualisations into meaningful conclusions required careful consideration. We had to distinguish between observed associations and causal relationships and avoid drawing conclusions that were not sufficiently supported by the data.
+\end{enumerate}
+
+\newpage
+% ==========================================
+% SECTION 3: FREQUENTLY ANSWERED QUESTIONS (FAQ)
+% ==========================================
+
+\section*{Section 3: Frequently Answered Questions (FAQ)}
+
+\vspace{0.3cm}
+
+%================================================
+% Q1
+%================================================
+
+\noindent
+{\color{black}\large\bfseries
+Q1: How financially successful are Bollywood movies, and how is profitability distributed?
+}
+\vspace{0.15cm}
+
+\noindent
+\textbf{A:} The analysis reveals that movie profitability is highly uneven. A large proportion of films fail to recover their production budgets, while a relatively small number of successful movies account for a substantial portion of total revenue.
+
+\begin{itemize}
+    \item 72.14\% of movies have an ROI below 1.
+    \item Median ROI is approximately 0.335.
+    \item 57.30\% have an ROI below 0.5.
+    \item 47.70\% generate revenue below ₹1 crore.
+\end{itemize}
+
+The mean revenue is approximately ₹23.78 crore, whereas the median revenue is only ₹1.25 crore. This substantial difference indicates a highly right-skewed revenue distribution, where a few blockbusters pull the average upwards.
+
+\vspace{0.1cm}
+\noindent
+\textbf{Conclusion:} The typical Bollywood movie in this dataset performs considerably worse financially than the average revenue figure suggests.
+
+\vspace{0.45cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{economy_distributions.png}
+    \caption{Budget,Revenue,ROI for raw,log based data and CDF of them.}
+    \label{fig:economy_distributions}
+\end{figure}
+
+%================================================
+% Q2
+%================================================
+
+\noindent
+{\color{black}\large\bfseries
+Q2: Do franchise movies generate higher revenue than standalone movies?
+}
+
+\vspace{0.15cm}
+
+\noindent
+\textbf{A:} The comparison shows a substantial difference in financial performance between franchise and non-franchise films.
+
+\vspace{0.2cm}
+
+\begin{center}
+\text{Table 3: Franchise vs Non-Franchise Movies}
+
+\vspace{0.15cm}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Metric} & \textbf{Franchise} & \textbf{Non-franchise} \\ \hline
+Number of movies & 80 & 1,618 \\ \hline
+Median revenue & ₹57.77 Cr & ₹1.01 Cr \\ \hline
+Median budget & ₹30 Cr & ₹5 Cr \\ \hline
+Median ROI & 1.73 & 0.30 \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+    \item Franchise movies have approximately 57.5 times the median revenue of non-franchise movies.
+    \item However, franchise movies also have considerably larger budgets and wider theatrical releases. Their median number of screens is 1,500, compared with 175 for non-franchise films.
+\end{itemize}
+
+\noindent
+\textbf{Conclusion:} Franchise movies demonstrate substantially higher revenue and ROI, but part of their revenue advantage can be attributed to their larger production and distribution scale. We cannot conclude that franchise status alone causes higher revenue.
+
+\vspace{0.45cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{franchise_vs_not.png}
+    \caption{Revenue comparison between franchise and non-franchise movies.}
+    \label{fig:franchise_vs_not}
+\end{figure}
+
+%================================================
+% Q3
+%================================================
+\noindent
+{\color{black}\large\bfseries
+Q3: Do remake movies perform better financially than original movies?
+}
+\vspace{0.15cm}
+
+\noindent
+\textbf{A:} The dataset indicates that remake movies have substantially higher financial performance than non-remake movies.
+
+\vspace{0.2cm}
+
+\begin{center}
+\text{Table 4: Remake vs Non-Remake Movies}
+
+\vspace{0.15cm}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Metric} & \textbf{Remake} & \textbf{Non-remake} \\ \hline
+Number of movies & 110 & 1,588 \\ \hline
+Median revenue & ₹38.81 Cr & ₹0.87 Cr \\ \hline
+Median budget & ₹27 Cr & ₹4.5 Cr \\ \hline
+Median ROI & 1.41 & 0.28 \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+    \item Remake movies generate approximately 44.9 times the median revenue of non-remake movies.
+    \item However, remake movies also receive significantly larger budgets and wider theatrical distribution.
+\end{itemize}
+
+\noindent
+\textbf{Conclusion:} Remakes are associated with higher revenue and ROI in this dataset. Nevertheless, their larger budgets and distribution scale must be considered before attributing this difference to remake status.
+
+\vspace{0.45cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{remake_vs_not.png}
+    \caption{Revenue comparison between remake and non-remake movies.}
+    \label{fig:remake_vs_not}
+\end{figure}
+
+%================================================
+% Q4
+%================================================
+
+\noindent
+{\color{black}\large\bfseries
+Q4: Does releasing a movie during a holiday period improve its financial performance?
+}
+
+\vspace{0.15cm}
+
+\noindent
+\textbf{A:} The analysis suggests that holiday releases are associated with higher box-office revenue.
+
+\vspace{0.2cm}
+
+\begin{center}
+\text{Table 5: Holiday vs Normal Releases}
+
+\vspace{0.15cm}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Metric} & \textbf{Holiday release} & \textbf{Normal release} \\ \hline
+Number of movies & 646 & 1,052 \\ \hline
+Median revenue & ₹2.29 Cr & ₹0.92 Cr \\ \hline
+Median budget & ₹7.5 Cr & ₹4.75 Cr \\ \hline
+Median ROI & 0.44 & 0.28 \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+    \item Holiday releases generate approximately 2.5 times the median revenue of normal releases.
+    \item Interestingly, their median budget is only around 1.58 times that of normal releases.
+\end{itemize}
+
+\noindent
+\textbf{Conclusion:} Holiday releases appear to have a financial advantage that is larger than the difference in their typical budgets. This suggests that release timing may be an important factor in movie performance. However, this is an observed association and does not establish causation.
+
+\vspace{0.45cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{holiday_vs_normal.png}
+    \caption{Revenue comparison between holiday-release and non-holiday-release movies.}
+    \label{fig:holiday_vs_not}
+\end{figure}
+
+%================================================
+% Q5
+%================================================
+
+\noindent
+{\color{black}\large\bfseries
+Q5: Do movies featuring frequently recurring lead stars and directors generate higher revenue?
+}
+
+\vspace{0.15cm}
+
+\noindent
+\textbf{A:} The analysis indicates that movies featuring frequently recurring lead stars and directors tend to have considerably higher median revenues.
+
+The dataset contains:
+
+\begin{itemize}
+    \item 761 distinct lead stars.
+    \item 1,045 distinct directors.
+\end{itemize}
+
+The ten most frequently appearing lead stars account for 244 movies (14.37\% of the dataset), while the ten most frequently appearing directors account for 123 movies (7.24\%).
+
+\vspace{0.2cm}
+
+\begin{center}
+\text{Table 6: Revenue Comparison for Frequently Recurring Names}
+
+\vspace{0.15cm}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Metric} & \textbf{Top 10 names} & \textbf{Other names} \\ \hline
+Median revenue (top 10 stars) & ₹46.97 Cr & ₹0.55 Cr \\ \hline
+Median revenue (top 10 directors) & ₹20.49 Cr & ₹0.96 Cr \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+    \item Some of the most frequently appearing lead stars include Akshay Kumar (48 films), Ajay Devgn (35 films), and Emraan Hashmi (27 films).
+    \item Among directors, Ram Gopal Verma (18 films), Priyadarshan (16 films), and Vikram Bhatt (16 films) appear most frequently.
+\end{itemize}
+
+\noindent
+\textbf{Conclusion:} Films featuring frequently recurring lead stars and directors have higher median revenues. However, these films also tend to receive larger budgets and wider releases. Therefore, the observed relationship may partly reflect the scale of projects associated with established industry names.
+
+\vspace{0.45cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{top_stars_directors.png}
+    \caption{Movie counts of top heros and directors.}
+    \label{fig:top_stars_directors}
+\end{figure}
+
+
+
+\end{document}
