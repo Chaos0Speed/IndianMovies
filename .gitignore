@@ -1,15 +1,10 @@
-# Python
-__pycache__/
-*.py[cod]
-.ipynb_checkpoints/
+# virtual environments / caches
 .venv/
 venv/
+__pycache__/
+.ipynb_checkpoints/
 
-# LaTeX build artifacts (produced by `make`)
+# LaTeX aux files (removed by `make clean`, kept out of git regardless)
 *.aux
 *.log
 *.out
-
-# OS / editor noise
-.DS_Store
-*.swp

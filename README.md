@@ -10,7 +10,7 @@ status, genre and crew novelty still explain box-office performance?
 |---|---|
 | `1.CleanUp.ipynb` | Cleans `DataSet.csv` → `CleanedDataSet.csv` (bool flags, genre dummies, `ROI`, `Revenue Per Screen`, `Movie_Scale`) and verifies the output against the raw data |
 | `2.EDA.ipynb` | EDA only: summary statistics, distributions, categorical composition, descriptive group comparisons (no tests), ROI by scale band |
-| `3.DistributionFitting.ipynb` | Distribution fitting proofs: χ² contests (lognormal wins for revenue and ROI), MoM vs MLE, QQ luck-tube audit, bootstrap CIs |
+| `3.DistributionFitting.ipynb` | Distribution fitting proofs: χ² contests (lognormal wins for revenue and ROI), MoM vs MLE, QQ luck-tube audit, parametric bootstrap CIs |
 | `4.LinearRegression.ipynb` | Regression only: log(ROI) response, scale-adjusted models, mediation, HC3 diagnostics, train/test validation |
 | `5.HypothesisTesting.ipynb` | Hypothesis tests only: H1–H4 four-stage OLS ladders (HC3), permutation confirmation within scale bins, revenue concentration |
 
